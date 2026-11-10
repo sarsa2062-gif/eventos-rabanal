@@ -1,0 +1,6 @@
+COMO OBTENER EL APK (sin instalar nada en tu PC)
+1. Crea un repositorio nuevo en github.com (gratis).
+2. Sube TODO el contenido de esta carpeta (incluida la carpeta oculta .github).
+3. Entra a la pestana Actions > "Construir APK" > espera ~5 minutos.
+4. Abre la ejecucion terminada y descarga "eventos-rabanal-apk" (zip con app-debug.apk).
+5. Pasa el APK al celular y permite "instalar apps desconocidas".
