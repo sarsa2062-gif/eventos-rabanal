@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eventos Rabanal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f6f0f4;--card:#fff;--ink:#2b1230;--mut:#7a6479;--ac:#a3205f;--ac2:#b8860b;--bad:#c2410c;--ok:#2f7d32;--line:#e4d3df;--me:#f7d9e8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#170c1a;--card:#241228;--ink:#f3e6f0;--mut:#b79bb2;--ac:#ff6fa8;--ac2:#f0c14d;--bad:#ff8a5c;--ok:#9bd36a;--line:#3d2342;--me:#4a1d3a}}
+:root[data-theme="dark"]{--bg:#170c1a;--card:#241228;--ink:#f3e6f0;--mut:#b79bb2;--ac:#ff6fa8;--ac2:#f0c14d;--bad:#ff8a5c;--ok:#9bd36a;--line:#3d2342;--me:#4a1d3a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2{font-family:Fraunces,Georgia,serif;font-weight:700;margin:0}
+header{padding:14px 16px 8px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+h1{font-size:23px}h1 small{display:block;font:12px system-ui;color:var(--mut);font-weight:400}
+select,input,textarea{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);max-width:100%}
+nav{display:flex;gap:4px;padding:0 12px;border-bottom:1px solid var(--line);overflow-x:auto}
+nav button{border:0;background:none;color:var(--mut);padding:10px 12px;font:600 14px system-ui;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav button.on{color:var(--ac);border-color:var(--ac)}
+main{max-width:900px;margin:0 auto;padding:14px 12px 40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--mut);font-weight:600}
+.n{text-align:right;font-variant-numeric:tabular-nums}
+.chat{display:flex;flex-direction:column;gap:6px;min-height:220px;max-height:46vh;overflow-y:auto;padding:4px}
+.b{max-width:85%;padding:8px 11px;border-radius:12px 12px 12px 3px;background:var(--card);border:1px solid var(--line);white-space:pre-wrap}
+.b.me{align-self:flex-end;background:var(--me);border-radius:12px 12px 3px 12px;border-color:transparent}
+.chips,.row{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.row input{flex:1;min-width:120px}
+.chip,.btn{border:1px solid var(--ac);color:var(--ac);background:none;border-radius:99px;padding:6px 12px;font:13px system-ui;cursor:pointer;text-decoration:none;display:inline-block}
+.btn{border-radius:8px}.btn.f{background:var(--ac);color:#fff}.btn:focus-visible,.chip:focus-visible,nav button:focus-visible,.dy:focus-visible{outline:2px solid var(--ac2);outline-offset:2px}
+.st{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:700;background:var(--line)}
+.st.CONFIRMADO{background:var(--ac);color:#fff}.st.EN_MONTAJE{background:var(--ac2);color:#2b1700}.st.REALIZADO{background:var(--ok);color:#fff}.st.CANCELADO{background:var(--bad);color:#fff}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:12px}
+.kp div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.kp b{display:block;font:700 22px Fraunces,Georgia,serif}.kp span{font-size:12px;color:var(--mut)}
+.bad{color:var(--bad)}.mut{color:var(--mut)}.ok{color:var(--ok)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:8px 0}
+.cal i{font:600 12px system-ui;color:var(--mut);text-align:center;font-style:normal}
+.dy{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;min-height:52px;padding:4px;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.dy.sel{border:2px solid var(--ac)}.dy.hoy{background:var(--me)}.dy small{font-size:11px;color:var(--ac);font-weight:700}.dy.off{opacity:.35;cursor:default}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.fg label{display:flex;flex-direction:column;font-size:12px;color:var(--mut);gap:3px}
+.ex{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0;font-size:13.5px}.ex label{display:flex;gap:5px;align-items:center}
+#ts{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;display:none;z-index:9;max-width:90%}
+</style></head><body>
+<header><h1>Eventos Rabanal<small>Gestión del local: reservas, banquete, equipo y cobros</small></h1>
+<label class="mut">Rol <select id="role"><option value="O">Dueño</option><option value="C">Coordinador</option></select></label></header>
+<nav id="nav"></nav><main id="v"></main><div id="ts" role="status"></div>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),S=n=>'S/ '+Math.round(n).toLocaleString('es-PE');
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),add=n=>{const d=new Date();d.setDate(d.getDate()+n);return iso(d)},fd=s=>{const[a,b,c]=s.split('-');return c+'/'+b+'/'+a};
+const SAL=[{id:1,n:'Salón Jardín',cap:250,p:3500},{id:2,n:'Terraza',cap:120,p:2000},{id:3,n:'Salón Principal',cap:400,p:5500}];
+const INS={arroz:['Arroz',4.5,'kg'],pollo:['Pollo',9.5,'kg'],res:['Carne de res',28,'kg'],cerdo:['Cerdo',16,'kg'],pescado:['Pescado',22,'kg'],papa:['Papa',2.2,'kg'],cebolla:['Cebolla',2.5,'kg'],aji:['Ají amarillo',8,'kg'],lechuga:['Lechuga',4,'kg']};
+const PK={buf:{n:'Buffet criollo',p:65,r:{arroz:.12,pollo:.15,papa:.15,cebolla:.03,aji:.01}},cok:{n:'Cóctel de bocaditos',p:45,r:{pollo:.08,pescado:.05,papa:.06,lechuga:.03}},men:{n:'Menú de 3 pasos',p:85,r:{res:.18,arroz:.1,pescado:.1,papa:.15,lechuga:.04}},par:{n:'Parrillada',p:70,r:{res:.15,cerdo:.15,pollo:.1,papa:.2,cebolla:.03}}};
+const EX={dj:['DJ y pista',900],dec:['Decoración floral',1200],son:['Sonido e iluminación',700],tor:['Torta y brindis',450],bar:['Barra libre (por persona)',40,1]};
+const EQ={sillas:['Sillas',300],mesas:['Mesas redondas',40],manteles:['Manteles',40],vajilla:['Juegos de vajilla',300]};
+const eqNeed=i=>{const m=Math.ceil(i/8);return{sillas:i,mesas:m,manteles:m,vajilla:i}};
+const TIPOS=['Boda','Cumpleaños','Corporativo','Quinceañero','Aniversario','Bautizo'],NEXT={COTIZADO:'CONFIRMADO',CONFIRMADO:'EN_MONTAJE',EN_MONTAJE:'REALIZADO'},LBL={CONFIRMADO:'Confirmar',EN_MONTAJE:'Iniciar montaje',REALIZADO:'Marcar realizado'};
+const mozos=i=>Math.ceil(i/25);
+function tot(e){const x=e.ex.reduce((s,k)=>s+EX[k][1]*(EX[k][2]?e.inv:1),0);return SAL.find(s=>s.id==e.sal).p+PK[e.pk].p*e.inv+x+mozos(e.inv)*120}
+const pag=e=>e.pg.reduce((s,p)=>s+p.m,0),cost=e=>Object.entries(PK[e.pk].r).reduce((s,[k,q])=>s+q*INS[k][1],0)*e.inv;
+let db,tab='cal',own=true,sd=add(1),cm=new Date(),F,chat=[],last=null,lock=false;
+function seed(){const stk={arroz:60,pollo:70,res:40,cerdo:30,pescado:35,papa:120,cebolla:30,aji:8,lechuga:20};
+return{nid:4,stk,kar:[],inc:[],ev:[{id:1,cl:'Familia Quispe',tel:'51999111222',tipo:'Boda',sal:1,fecha:add(6),hi:'18:00',hf:'23:59',inv:180,pk:'men',ex:['dj','dec','son'],s:'CONFIRMADO',pg:[{m:0,t:'Adelanto',f:add(-8)}]},
+{id:2,cl:'Minera Andes SAC',tel:'51988777666',tipo:'Corporativo',sal:2,fecha:add(2),hi:'10:00',hf:'16:00',inv:80,pk:'buf',ex:['son'],s:'CONFIRMADO',pg:[]},
+{id:3,cl:'Lucía Rabanal',tel:'51977333444',tipo:'Cumpleaños',sal:2,fecha:add(13),hi:'20:00',hf:'23:59',inv:60,pk:'par',ex:['tor','bar'],s:'COTIZADO',pg:[]}]}}
+function boot(){try{db=JSON.parse(localStorage.getItem('rabanal1'))}catch(e){}if(!db){db=seed();db.ev[0].pg=[{m:Math.round(tot(db.ev[0])/2),t:'Adelanto',f:add(-8)}];db.ev[1].pg=[{m:Math.round(tot(db.ev[1])/2),t:'Adelanto',f:add(-3)}]}
+F={cl:'',tel:'',tipo:'Boda',sal:1,hi:'18:00',hf:'23:59',inv:100,pk:'buf',ex:[]};chat=[['b','Hola, soy el asistente de Eventos Rabanal. Dime cuántos invitados serán y la fecha (por ejemplo: "boda 120 personas 15/11") y te cotizo.']]}
+function save(){try{localStorage.setItem('rabanal1',JSON.stringify(db))}catch(e){}}
+function toast(m){const t=$('#ts');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',3200)}
+const live=e=>e.s!=='CANCELADO';
+function clash(e){return db.ev.find(o=>o.id!==e.id&&live(o)&&o.sal==e.sal&&o.fecha===e.fecha&&o.hi<e.hf&&e.hi<o.hf)}
+function eqUse(f){const u={sillas:0,mesas:0,manteles:0,vajilla:0};db.ev.filter(o=>live(o)&&o.s!=='REALIZADO'&&o.fecha===f).forEach(o=>{const n=eqNeed(o.inv);for(const k in u)u[k]+=n[k]});return u}
+function mk(d){const e={id:db.nid++,cl:d.cl||'Cliente WhatsApp',tel:d.tel||'',tipo:d.tipo,sal:+d.sal,fecha:d.fecha,hi:d.hi,hf:d.hf,inv:+d.inv,pk:d.pk,ex:d.ex.slice(),s:'COTIZADO',pg:[]};
+if(!e.fecha)throw'Elige la fecha del evento';if(e.inv<1)throw'Indica la cantidad de invitados';if(e.hf<=e.hi)throw'La hora de fin debe ser posterior al inicio';
+const s=SAL.find(x=>x.id==e.sal);if(e.inv>s.cap)throw s.n+' admite hasta '+s.cap+' personas';const c=clash(e);if(c)throw s.n+' ya está reservado ese día en ese horario (evento #'+c.id+')';
+const u=eqUse(e.fecha),n=eqNeed(e.inv);for(const k in n)if(u[k]+n[k]>EQ[k][1])throw'Falta equipo: '+EQ[k][0]+' (hay '+EQ[k][1]+', ese día se necesitan '+(u[k]+n[k])+')';
+db.ev.push(e);return e}
+function setSt(e,s){if(s==='CONFIRMADO'&&pag(e)<tot(e)/2){toast('Para confirmar, cobra primero el adelanto (50%)');return}
+if(s==='REALIZADO'&&pag(e)<tot(e)){toast('Queda saldo por cobrar: '+S(tot(e)-pag(e)));return}
+if(s==='EN_MONTAJE'){const falta=[];for(const[k,q]of Object.entries(PK[e.pk].r))if(db.stk[k]<q*e.inv)falta.push(INS[k][0]);
+if(falta.length){db.inc.push({t:'Stock',m:'Evento #'+e.id+': insumo insuficiente → '+falta.join(', ')});toast('Stock insuficiente: '+falta.join(', '))}
+for(const[k,q]of Object.entries(PK[e.pk].r)){const d=Math.min(db.stk[k],q*e.inv);db.stk[k]=+(db.stk[k]-d).toFixed(2);db.kar.unshift({n:INS[k][0],q:+d.toFixed(2),src:'Evento #'+e.id})}}
+e.s=s}
+function cobrar(e,t){const m=t==='Adelanto'?Math.round(tot(e)/2)-pag(e):tot(e)-pag(e);if(m<=0){toast('Nada pendiente en este concepto');return}e.pg.push({m,t,f:iso(new Date())});if(t==='Adelanto'&&e.s==='COTIZADO')e.s='CONFIRMADO';toast('Cobrado '+S(m))}
+function wa(e){return'https://wa.me/'+e.tel+'?text='+encodeURIComponent('Hola '+e.cl+', cotización Eventos Rabanal\n'+e.tipo+' el '+fd(e.fecha)+' ('+e.hi+'–'+e.hf+')\n'+SAL.find(s=>s.id==e.sal).n+' · '+e.inv+' invitados · '+PK[e.pk].n+'\nTotal '+S(tot(e))+'. Para reservar, adelanto del 50%: '+S(tot(e)/2))}
+function say(t){chat.push(['me',t]);const T=t.toLowerCase(),n=(T.match(/(\d+)\s*(personas|invitados|pax)/)||T.match(/(\d{2,3})\b(?!\/)/)||[])[1],dm=T.match(/(\d{1,2})\/(\d{1,2})/);let f=T.includes('mañana')?add(1):dm?new Date().getFullYear()+'-'+dm[2].padStart(2,'0')+'-'+dm[1].padStart(2,'0'):null;
+if(/^reservar (\d)/.test(T)&&last){try{const e=mk({...last,sal:T.match(/\d/)[0]});chat.push(['b','Listo: cotización #'+e.id+' creada para '+fd(e.fecha)+'. Cuando paguen el adelanto del 50%, queda confirmada.']);last=null}catch(x){chat.push(['b',String(x)])}return}
+if(!n||!f){chat.push(['b','Necesito cantidad de invitados y fecha. Ejemplo: "cumpleaños 60 personas mañana" o "boda 150 personas 20/11".']);return}
+const tipo=TIPOS.find(x=>T.includes(x.toLowerCase().slice(0,5)))||'Cumpleaños',hi='18:00',hf='23:59',ok=SAL.filter(s=>s.cap>=n&&!clash({id:0,sal:s.id,fecha:f,hi,hf}));
+if(!ok.length){chat.push(['b','Ese día no tenemos salón libre para '+n+' personas. ¿Probamos otra fecha?']);return}
+last={tipo,fecha:f,hi,hf,inv:n,pk:'buf',ex:[]};chat.push(['b','Para '+n+' personas el '+fd(f)+', con buffet criollo, tenemos libre:\n'+ok.map(s=>'• '+s.n+' ('+s.id+'): '+S(tot({sal:s.id,inv:+n,pk:'buf',ex:[]}))).join('\n')+'\nResponde "reservar 1" con el número del salón.'])}
+const kp=a=>'<div class="kp">'+a.map(([v,l])=>'<div><b>'+v+'</b><span>'+l+'</span></div>').join('')+'</div>';
+function vcal(){const y=cm.getFullYear(),m=cm.getMonth(),first=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate(),mes=cm.toLocaleDateString('es-PE',{month:'long',year:'numeric'});
+let g='<i>Lu</i><i>Ma</i><i>Mi</i><i>Ju</i><i>Vi</i><i>Sá</i><i>Do</i>'+'<span></span>'.repeat(first);
+for(let d=1;d<=days;d++){const f=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0'),c=db.ev.filter(e=>e.fecha===f&&live(e)).length;g+='<button class="dy '+(f===sd?'sel ':'')+(f===iso(new Date())?'hoy':'')+'" data-a="dia" data-v="'+f+'" aria-label="'+fd(f)+', '+c+' eventos">'+d+(c?'<small>'+c+' ev.</small>':'')+'</button>'}
+const dayEv=db.ev.filter(e=>e.fecha===sd&&live(e)).sort((a,b)=>a.hi<b.hi?-1:1);
+const opt=(o,v)=>o.map(([k,l])=>'<option value="'+k+'" '+(v==k?'selected':'')+'>'+esc(l)+'</option>').join('');
+return'<div class="card"><div class="row" style="justify-content:space-between;align-items:center"><button class="btn" data-a="mes" data-v="-1" aria-label="Mes anterior">‹</button><b style="text-transform:capitalize">'+mes+'</b><button class="btn" data-a="mes" data-v="1" aria-label="Mes siguiente">›</button></div><div class="cal">'+g+'</div></div>'+
+'<div class="card"><b>'+fd(sd)+'</b>'+(dayEv.map(e=>'<div style="padding:6px 0;border-bottom:1px solid var(--line)"><span class="st '+e.s+'">'+e.s.replace('_',' ')+'</span> <b>'+esc(e.tipo)+'</b> · '+esc(e.cl)+'<br><span class="mut">'+SAL.find(s=>s.id==e.sal).n+' · '+e.hi+'–'+e.hf+' · '+e.inv+' invitados</span></div>').join('')||'<div class="mut">Día libre en los tres espacios.</div>')+'</div>'+
+'<div class="card"><b>Nueva reserva para '+fd(sd)+'</b><div class="fg" style="margin-top:8px"><label>Cliente<input data-f="cl" value="'+esc(F.cl)+'"></label><label>WhatsApp (con 51)<input data-f="tel" inputmode="numeric" value="'+esc(F.tel)+'"></label><label>Tipo<select data-f="tipo">'+opt(TIPOS.map(t=>[t,t]),F.tipo)+'</select></label><label>Espacio<select data-f="sal">'+opt(SAL.map(s=>[s.id,s.n+' (hasta '+s.cap+')']),F.sal)+'</select></label><label>Inicio<input type="time" data-f="hi" value="'+F.hi+'"></label><label>Fin<input type="time" data-f="hf" value="'+F.hf+'"></label><label>Invitados<input type="number" min="1" data-f="inv" value="'+F.inv+'"></label><label>Servicio de comida<select data-f="pk">'+opt(Object.entries(PK).map(([k,p])=>[k,p.n+' · '+S(p.p)+' p/p']),F.pk)+'</select></label></div>'+
+'<div class="ex">'+Object.entries(EX).map(([k,x])=>'<label><input type="checkbox" data-f="ex" value="'+k+'" '+(F.ex.includes(k)?'checked':'')+'>'+x[0]+'</label>').join('')+'</div><button class="btn f" data-a="crear">Cotizar y reservar</button>'+(own?' <span class="mut">Total estimado: <b>'+S(tot({...F,fecha:sd}))+'</b></span>':'')+'</div>'}
+function vev(){const l=db.ev.slice().sort((a,b)=>a.fecha<b.fecha?-1:1);return l.map(e=>{const t=tot(e),p=pag(e),s=SAL.find(x=>x.id==e.sal);return'<div class="card"><div style="display:flex;justify-content:space-between;gap:8px"><b>#'+e.id+' · '+esc(e.tipo)+' · '+esc(e.cl)+'</b><span class="st '+e.s+'">'+e.s.replace('_',' ')+'</span></div><div class="mut">'+fd(e.fecha)+' · '+e.hi+'–'+e.hf+' · '+s.n+' · '+e.inv+' invitados</div><div>'+PK[e.pk].n+(e.ex.length?' + '+e.ex.map(k=>EX[k][0]).join(', '):'')+'</div><div class="mut">Personal: '+mozos(e.inv)+' mozos'+(e.ex.includes('dj')?' + DJ':'')+'</div>'+
+(own?'<div>Total <b>'+S(t)+'</b> · cobrado '+S(p)+' · saldo <b class="'+(t-p>0?'bad':'ok')+'">'+S(t-p)+'</b></div>':'')+
+'<div class="row">'+(NEXT[e.s]?'<button class="btn f" data-a="est" data-v="'+e.id+'|'+NEXT[e.s]+'">'+LBL[NEXT[e.s]]+'</button>':'')+(own&&live(e)&&e.s!=='REALIZADO'?'<button class="btn" data-a="cob" data-v="'+e.id+'|Adelanto">Cobrar adelanto 50%</button><button class="btn" data-a="cob" data-v="'+e.id+'|Saldo">Cobrar saldo</button>':'')+(e.tel?'<a class="btn" target="_blank" rel="noopener" href="'+wa(e)+'">Enviar cotización</a>':'')+(NEXT[e.s]?'<button class="btn" data-a="est" data-v="'+e.id+'|CANCELADO">Cancelar</button>':'')+'</div></div>'}).join('')}
+function vcoc(){const lim=add(7),hoy=iso(new Date()),sel=db.ev.filter(e=>(e.s==='CONFIRMADO')&&e.fecha>=hoy&&e.fecha<=lim),R={};
+sel.forEach(e=>{for(const[k,q]of Object.entries(PK[e.pk].r))R[k]=(R[k]||0)+q*e.inv});const ks=Object.keys(R);let tc=0;
+const rows=ks.map(k=>{const falta=Math.max(0,R[k]-db.stk[k]);tc+=falta*INS[k][1];return'<tr><td>'+INS[k][0]+'</td><td class="n">'+R[k].toFixed(1)+' kg</td><td class="n">'+db.stk[k]+' kg</td><td class="n '+(falta?'bad':'')+'"><b>'+falta.toFixed(1)+' kg</b></td>'+(own?'<td class="n">'+S(falta*INS[k][1])+'</td>':'')+'</tr>'}).join('');
+return'<div class="card"><b>Banquete de los próximos 7 días</b><p class="mut">Eventos confirmados: '+(sel.map(e=>'#'+e.id+' ('+fd(e.fecha)+', '+e.inv+' pax)').join(' · ')||'ninguno')+'</p></div><div class="card scroll"><table><tr><th>Insumo</th><th class="n">Necesario</th><th class="n">Stock</th><th class="n">A comprar</th>'+(own?'<th class="n">Costo</th>':'')+'</tr>'+(rows||'<tr><td colspan="5" class="mut">Sin eventos confirmados esta semana.</td></tr>')+(own&&rows?'<tr><th colspan="4">Compra estimada</th><th class="n">'+S(tc)+'</th></tr>':'')+'</table></div>'}
+function veq(){const hoy=iso(new Date()),fs=[...new Set(db.ev.filter(e=>live(e)&&e.s!=='REALIZADO'&&e.fecha>=hoy).map(e=>e.fecha))].sort();
+return'<div class="card scroll"><b>Equipo por fecha</b><table><tr><th>Fecha</th>'+Object.values(EQ).map(x=>'<th class="n">'+x[0]+' / '+x[1]+'</th>').join('')+'</tr>'+fs.map(f=>{const u=eqUse(f);return'<tr><td>'+fd(f)+'</td>'+Object.keys(EQ).map(k=>'<td class="n '+(u[k]>EQ[k][1]?'bad':'')+'">'+u[k]+'</td>').join('')+'</tr>'}).join('')+'</table></div><div class="card scroll"><b>Insumos de cocina</b><table><tr><th>Artículo</th><th class="n">Stock</th>'+(own?'<th class="n">Costo/kg</th>':'')+'</tr>'+Object.keys(INS).map(k=>'<tr><td>'+INS[k][0]+'</td><td class="n">'+db.stk[k]+' kg</td>'+(own?'<td class="n">'+S(INS[k][1])+'</td>':'')+'</tr>').join('')+'</table></div><div class="card scroll"><b>Kardex</b><table><tr><th>Artículo</th><th class="n">Salida</th><th>Origen</th></tr>'+(db.kar.slice(0,12).map(r=>'<tr><td>'+r.n+'</td><td class="n">'+r.q+' kg</td><td>'+r.src+'</td></tr>').join('')||'<tr><td colspan="3" class="mut">Sin movimientos. Inicia el montaje de un evento.</td></tr>')+'</table></div>'}
+function vres(){const L=db.ev.filter(live),re=L.filter(e=>e.s==='REALIZADO'),cob=L.reduce((s,e)=>s+pag(e),0),por=L.filter(e=>e.s!=='COTIZADO').reduce((s,e)=>s+tot(e)-pag(e),0),m=iso(new Date()).slice(0,7),mes=L.filter(e=>e.fecha.startsWith(m)).length,ing=re.reduce((s,e)=>s+tot(e),0),cg=re.reduce((s,e)=>s+cost(e),0);
+const inc='<div class="card"><b>Incidencias</b>'+(db.inc.map((i,x)=>'<div style="padding:6px 0;border-bottom:1px solid var(--line)"><b>'+i.t+'</b> '+esc(i.m)+' <button class="btn" data-a="inc" data-v="'+x+'">Cerrar</button></div>').join('')||'<div class="mut">Sin incidencias.</div>')+'</div>';
+return(own?kp([[S(cob),'Cobrado'],[S(por),'Por cobrar (confirmados)'],[mes,'Eventos del mes'],[S(ing),'Ventas de eventos realizados'],[ing?(cg/ing*100).toFixed(1)+'%':'—','Costo de insumos / venta']])+'<div class="card scroll"><table><tr><th>Servicio</th><th class="n">Precio p/p</th><th class="n">Costo p/p</th><th class="n">Margen</th></tr>'+Object.values(PK).map(p=>{const c=Object.entries(p.r).reduce((s,[k,q])=>s+q*INS[k][1],0);return'<tr><td>'+p.n+'</td><td class="n">'+S(p.p)+'</td><td class="n">'+S(c)+'</td><td class="n">'+((1-c/p.p)*100).toFixed(1)+'%</td></tr>'}).join('')+'</table></div>':'<div class="card mut">El coordinador no ve cobros ni márgenes.</div>')+inc}
+function render(){const T=[['chat','WhatsApp'],['cal','Calendario'],['ev','Eventos ('+db.ev.filter(live).length+')'],['coc','Cocina'],['eq','Equipo e inventario'],['res','Resumen']];$('#nav').innerHTML=T.map(([k,l])=>'<button class="'+(tab===k?'on':'')+'" data-t="'+k+'">'+l+'</button>').join('');
+let h='';if(tab==='chat')h='<div class="card"><div class="chat" id="ch">'+chat.map(([w,t])=>'<div class="b '+(w==='me'?'me':'')+'">'+esc(t)+'</div>').join('')+'</div><div class="chips"><button class="chip" data-c="boda 150 personas 20/11">Boda 150 personas</button><button class="chip" data-c="cumpleaños 60 personas mañana">Cumpleaños mañana</button></div><div class="row"><input id="tx" placeholder="Escribe como cliente…" aria-label="Mensaje"><button class="btn f" id="go">Enviar</button></div></div>';
+if(tab==='cal')h=vcal();if(tab==='ev')h=vev();if(tab==='coc')h=vcoc();if(tab==='eq')h=veq();if(tab==='res')h=vres();$('#v').innerHTML=h;const c=$('#ch');if(c)c.scrollTop=1e5;save()}
+function A(a,v){if(a==='dia'){sd=v}else if(a==='mes'){cm=new Date(cm.getFullYear(),cm.getMonth()+ +v,1)}else if(a==='crear'){try{const e=mk({...F,fecha:sd});toast('Reserva #'+e.id+' cotizada: '+S(tot(e)));F.cl='';F.tel='';tab='ev'}catch(x){toast(String(x))}}
+else if(a==='est'){const[i,s]=v.split('|'),e=db.ev.find(o=>o.id==i);if(s==='CANCELADO'){e.s=s}else setSt(e,s)}else if(a==='cob'){const[i,t]=v.split('|');cobrar(db.ev.find(o=>o.id==i),t)}else if(a==='inc')db.inc.splice(+v,1)}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-t],[data-c],[data-a],#go');if(!t)return;if(t.dataset.t)tab=t.dataset.t;else if(t.dataset.c)say(t.dataset.c);else if(t.dataset.a)A(t.dataset.a,t.dataset.v);else if(t.id==='go'){const i=$('#tx');if(i.value.trim())say(i.value.trim())}render()});
+document.addEventListener('change',e=>{const t=e.target,f=t.dataset.f;if(!f)return;if(f==='ex')F.ex=[...document.querySelectorAll('[data-f=ex]:checked')].map(x=>x.value);else F[f]=t.type==='number'?+t.value:t.value;render()});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='tx')$('#go').click()});
+$('#role').onchange=e=>{own=e.target.value==='O';render()};
+boot();render();
+</script></body></html>
